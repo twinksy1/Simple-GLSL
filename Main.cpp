@@ -11,18 +11,20 @@ int main()
 {
     Display display(3000, 2000, "Name");
     Shader shader("./Shader_Programs/basicShader");
+    Shader shader2("./Shader_Programs/Shad1");
     Texture texture("./Images/monkey.png");
     Camera cam(glm::vec3(0.0,0.0,-3.0),70.0f,(float)display.getXres()/(float)display.getYres(),
                0.01f, 1000.0f);
     Transform transform;
+    Transform transform2;
 
-    /*Vertex vertices[] = { Vertex(glm::vec3(-0.5,-0.5,0.0), glm::vec2(0.0,0.0)),
-                          Vertex(glm::vec3(0.0,0.5,0.0), glm::vec2(0.5,1.0)),
-                          Vertex(glm::vec3(0.5,-0.5,0.0), glm::vec2(1.0,0.0))
+    Vertex vertices[] = { Vertex(glm::vec3(-0.5,-0.5,0.0)),
+                          Vertex(glm::vec3(0.0,0.5,0.0)),
+                          Vertex(glm::vec3(0.5,-0.5,0.0))
                         };
     unsigned int indices[] = {0, 1, 2};
     Mesh mesh(vertices, sizeof(vertices)/sizeof(vertices[0]), indices, sizeof(indices)/sizeof(indices[0]));
-    */
+    
     Mesh mesh2("Sample_Mesh.obj");
 
     float counter = 0.0f;
@@ -36,10 +38,14 @@ int main()
         //float newScale = cosf(counter*DEG2RAD);
         //transform.setScale(glm::vec3(newScale, newScale, newScale));
 
-        mesh2.draw();
         shader.bind();
         shader.update(transform, cam);
         texture.bind(0);
+        mesh2.draw();
+
+        shader2.bind();
+        shader2.update(transform2, cam);
+        mesh.draw();
         display.update(cam);
 
         counter += 0.5f;

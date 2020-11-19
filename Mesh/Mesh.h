@@ -18,6 +18,10 @@ class Vertex {
         this->texCoord = texCoord;
         this->normal = normal;
     }
+    Vertex(const glm::vec3& pos)
+    {
+        this->pos = pos;
+    }
     inline glm::vec3* getPos() { return &pos; }
     inline glm::vec2* getTexCoord() { return &texCoord; }
     inline glm::vec3* getNormal() { return &normal; }
